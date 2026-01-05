@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  postgres-auth:
+    image: postgres:14
+    container_name: postgres-auth
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: auth_service
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-auth-data:/var/lib/postgresql/data
+    networks:
+      - ferias-network
+
+  postgres-puestos:
+    image: postgres:14
+    container_name: postgres-puestos
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: stalls_service
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-puestos-data:/var/lib/postgresql/data
+    networks:
+      - ferias-network
+
+  postgres-productos:
+    image: postgres:14
+    container_name: postgres-productos
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: products_service
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres-productos-data:/var/lib/postgresql/data
+    networks:
+      - ferias-network
+
+  postgres-pedidos:
+    image: postgres:14
+    container_name: postgres-pedidos
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orders_service
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres-pedidos-data:/var/lib/postgresql/data
+    networks:
+      - ferias-network
+
+volumes:
+  postgres-auth-data:
+  postgres-puestos-data:
+  postgres-productos-data:
+  postgres-pedidos-data:
+
+networks:
+  ferias-network:
+    driver: bridge
+
