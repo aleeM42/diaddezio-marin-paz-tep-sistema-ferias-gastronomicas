@@ -15,7 +15,7 @@ import {
   Res,
   HttpException,
 } from '@nestjs/common';
-import { Request as ExpressRequest, Response as ExpressResponse } from 'express';
+import type { Request as ExpressRequest } from 'express';
 import { GatewayService } from './gateway.service';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
@@ -66,6 +66,14 @@ export class GatewayController {
     return this.gatewayService.proxyToPuestos('GET', '/puestos/activos');
   }
 
+  @Get('puestos/mis-puestos')
+  @UseGuards(JwtAuthGuard)
+  async getMisPuestos(@Req() req: ExpressRequest) {
+    return this.gatewayService.proxyToPuestos('GET', '/puestos/mis-puestos', null, {
+      authorization: req.headers.authorization,
+    });
+  }
+
   @Get('puestos/:id')
   async getPuesto(@Param('id') id: string) {
     return this.gatewayService.proxyToPuestos('GET', `/puestos/${id}`);
@@ -107,14 +115,6 @@ export class GatewayController {
   @UseGuards(JwtAuthGuard)
   async deletePuesto(@Param('id') id: string, @Req() req: ExpressRequest) {
     return this.gatewayService.proxyToPuestos('DELETE', `/puestos/${id}`, null, {
-      authorization: req.headers.authorization,
-    });
-  }
-
-  @Get('puestos/mis-puestos')
-  @UseGuards(JwtAuthGuard)
-  async getMisPuestos(@Req() req: ExpressRequest) {
-    return this.gatewayService.proxyToPuestos('GET', '/puestos/mis-puestos', null, {
       authorization: req.headers.authorization,
     });
   }
@@ -220,7 +220,9 @@ export class GatewayController {
     if (req.user?.rol !== 'organizador') {
       throw new HttpException('Solo los organizadores pueden ver estadísticas', 403);
     }
-    return this.gatewayService.getEstadisticas();
+    // Pasar el token de autenticación a las llamadas internas
+    const authToken = req.headers.authorization?.replace('Bearer ', '') || '';
+    return this.gatewayService.getEstadisticas(authToken);
   }
 }
 

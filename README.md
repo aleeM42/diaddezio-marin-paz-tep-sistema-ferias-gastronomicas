@@ -53,7 +53,7 @@ cd ../puestos-service && npm install
 cd ../productos-service && npm install
 cd ../pedidos-service && npm install
 cd ../api-gateway && npm install
-```
+
 
 ### Configuración de Base de Datos
 

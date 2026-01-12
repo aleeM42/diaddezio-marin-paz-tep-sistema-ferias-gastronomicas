@@ -37,6 +37,9 @@ export class PedidosService {
     let total = 0;
     items.forEach((item) => {
       const productoInfo = productosInfo.find((p) => p.id === item.productId);
+      if (!productoInfo) {
+        throw new NotFoundException(`Producto ${item.productId} no encontrado`);
+      }
       total += productoInfo.price * item.quantity;
     });
 
@@ -59,6 +62,9 @@ export class PedidosService {
       const detalles: DetallePedido[] = [];
       for (const item of items) {
         const productoInfo = productosInfo.find((p) => p.id === item.productId);
+        if (!productoInfo) {
+          throw new NotFoundException(`Producto ${item.productId} no encontrado`);
+        }
         
         const detalle = queryRunner.manager.create(DetallePedido, {
           orderId: pedidoGuardado.id,

@@ -133,7 +133,8 @@ npm run start:dev
 **Terminal 5 - API Gateway:**
 ```bash
 cd api-gateway
-npm run start:dev
+
+
 ```
 
 ## Paso 6: Verificar que Todo Funciona
@@ -172,10 +173,42 @@ curl -X POST http://localhost:3000/auth/register \
 
 ## Próximos Pasos
 
-1. Crear usuarios de prueba (cliente, emprendedor, organizador)
-2. Crear puestos de prueba
-3. Aprobar y activar puestos
-4. Crear productos
-5. Realizar pedidos de prueba
-6. Verificar estadísticas
+### Pruebas del Sistema
+
+Para probar el sistema completo, consulta el archivo `PRUEBAS_POSTMAN.md` que contiene todas las peticiones necesarias organizadas por funcionalidad.
+
+**Orden recomendado de pruebas:**
+
+1. **Crear usuarios de prueba** (cliente, emprendedor, organizador)
+   - Usa el endpoint `POST /auth/register` con diferentes roles
+   - Guarda los tokens de autenticación para las siguientes pruebas
+
+2. **Crear puestos de prueba**
+   - Usa el endpoint `POST /puestos` con token de emprendedor
+   - Los puestos se crean en estado `pendiente`
+
+3. **Aprobar y activar puestos**
+   - Usa `POST /puestos/:id/aprobar` con token de organizador (cambia a `aprobado`)
+   - Usa `POST /puestos/:id/activar` con token de organizador (cambia a `activo`)
+
+4. **Crear productos**
+   - Usa `POST /productos` con token de emprendedor
+   - Los productos solo se pueden crear para puestos que pertenecen al emprendedor
+   - El puesto debe estar en estado `aprobado` o `activo`
+
+5. **Realizar pedidos de prueba**
+   - Usa `POST /pedidos` con token de cliente
+   - El puesto debe estar en estado `activo`
+   - Los productos deben tener stock disponible
+
+6. **Actualizar estados de pedidos**
+   - Emprendedor: `pendiente` → `preparando` → `listo`
+   - Cliente: `listo` → `entregado`
+   - Usa `PATCH /pedidos/:id/estado` con el estado correspondiente
+
+7. **Verificar estadísticas**
+   - Usa `GET /estadisticas` con token de organizador
+   - Muestra resumen de pedidos, ventas, puestos activos, etc.
+
+**Nota:** Para importar estas pruebas en Postman, consulta el archivo `PRUEBAS_POSTMAN.md` que incluye todas las peticiones con ejemplos de body, headers y scripts para guardar variables.
 

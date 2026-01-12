@@ -85,12 +85,26 @@ export class GatewayService {
   }
 
   // Métodos para estadísticas del organizador
-  async getEstadisticas() {
+  async getEstadisticas(authToken?: string) {
     try {
+      const headers = authToken ? { authorization: `Bearer ${authToken}` } : {};
+      
       const [pedidos, puestos, productos] = await Promise.all([
-        this.pedidosService.get('/pedidos'),
-        this.puestosService.get('/puestos'),
-        this.productosService.get('/productos'),
+        this.pedidosService.request({
+          method: 'get',
+          url: '/pedidos',
+          headers,
+        }),
+        this.puestosService.request({
+          method: 'get',
+          url: '/puestos',
+          headers,
+        }),
+        this.productosService.request({
+          method: 'get',
+          url: '/productos',
+          headers,
+        }),
       ]);
 
       // Calcular estadísticas
