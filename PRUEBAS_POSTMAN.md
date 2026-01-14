@@ -189,9 +189,9 @@ Authorization: Bearer {{token_cliente}}
 
 ---
 
-## 2. Crear Puestos de Prueba
+## 2. CRUD de Puestos
 
-### 2.1 Crear Puesto (Emprendedor)
+### 2.1 CREATE - Crear Puesto (Emprendedor)
 
 **POST** `{{base_url}}/puestos`
 
@@ -219,7 +219,7 @@ if (pm.response.code === 201) {
 
 ---
 
-### 2.2 Listar Todos los Puestos
+### 2.2 READ - Listar Todos los Puestos
 
 **GET** `{{base_url}}/puestos`
 
@@ -230,7 +230,7 @@ Content-Type: application/json
 
 ---
 
-### 2.3 Listar Puestos Activos
+### 2.3 READ - Listar Puestos Activos
 
 **GET** `{{base_url}}/puestos/activos`
 
@@ -241,7 +241,7 @@ Content-Type: application/json
 
 ---
 
-### 2.4 Obtener Puesto por ID
+### 2.4 READ - Obtener Puesto por ID
 
 **GET** `{{base_url}}/puestos/{{puesto_id}}`
 
@@ -252,7 +252,7 @@ Content-Type: application/json
 
 ---
 
-### 2.5 Ver Mis Puestos (Emprendedor)
+### 2.5 READ - Ver Mis Puestos (Emprendedor)
 
 **GET** `{{base_url}}/puestos/mis-puestos`
 
@@ -263,7 +263,42 @@ Authorization: Bearer {{token_emprendedor}}
 
 ---
 
-## 3. Aprobar y Activar Puestos
+### 2.6 UPDATE - Actualizar Puesto (Emprendedor)
+
+**PATCH** `{{base_url}}/puestos/{{puesto_id}}`
+
+**Headers:**
+```
+Content-Type: application/json
+Authorization: Bearer {{token_emprendedor}}
+```
+
+**Body:**
+```json
+{
+  "name": "Puesto de Tacos Premium",
+  "description": "Los mejores tacos de la feria - actualizado"
+}
+```
+
+**Nota:** Solo puedes actualizar tus propios puestos. Todos los campos son opcionales.
+
+---
+
+### 2.7 DELETE - Eliminar Puesto (Emprendedor)
+
+**DELETE** `{{base_url}}/puestos/{{puesto_id}}`
+
+**Headers:**
+```
+Authorization: Bearer {{token_emprendedor}}
+```
+
+**Nota:** Solo puedes eliminar tus propios puestos.
+
+---
+
+## 3. Gestión de Estados de Puestos (Organizador)
 
 ### 3.1 Aprobar Puesto (Organizador)
 
@@ -422,9 +457,9 @@ Authorization: Bearer {{token_emprendedor}}
 
 ---
 
-## 5. Realizar Pedidos de Prueba
+## 5. CRUD de Pedidos
 
-### 5.1 Crear Pedido (Cliente)
+### 5.1 CREATE - Crear Pedido (Cliente)
 
 **POST** `{{base_url}}/pedidos`
 
@@ -457,7 +492,18 @@ if (pm.response.code === 201) {
 
 ---
 
-### 5.2 Ver Mis Pedidos (Cliente)
+### 5.2 READ - Listar Todos los Pedidos (Organizador)
+
+**GET** `{{base_url}}/pedidos`
+
+**Headers:**
+```
+Authorization: Bearer {{token_organizador}}
+```
+
+---
+
+### 5.3 READ - Ver Mis Pedidos (Cliente)
 
 **GET** `{{base_url}}/pedidos/mis-pedidos`
 
@@ -468,7 +514,7 @@ Authorization: Bearer {{token_cliente}}
 
 ---
 
-### 5.3 Obtener Pedido por ID
+### 5.4 READ - Obtener Pedido por ID
 
 **GET** `{{base_url}}/pedidos/{{pedido_id}}`
 
@@ -477,9 +523,11 @@ Authorization: Bearer {{token_cliente}}
 Authorization: Bearer {{token_cliente}}
 ```
 
+**Nota:** Puedes ver el pedido si eres el cliente que lo creó, el emprendedor dueño del puesto, o el organizador.
+
 ---
 
-### 5.4 Actualizar Estado del Pedido - Preparando (Emprendedor)
+### 5.5 UPDATE - Actualizar Estado del Pedido - Preparando (Emprendedor)
 
 **PATCH** `{{base_url}}/pedidos/{{pedido_id}}/estado`
 
@@ -496,9 +544,11 @@ Authorization: Bearer {{token_emprendedor}}
 }
 ```
 
+**Nota:** Solo el emprendedor dueño del puesto puede cambiar el estado a `preparando` o `listo`.
+
 ---
 
-### 5.5 Actualizar Estado del Pedido - Listo (Emprendedor)
+### 5.6 UPDATE - Actualizar Estado del Pedido - Listo (Emprendedor)
 
 **PATCH** `{{base_url}}/pedidos/{{pedido_id}}/estado`
 
@@ -517,7 +567,7 @@ Authorization: Bearer {{token_emprendedor}}
 
 ---
 
-### 5.6 Actualizar Estado del Pedido - Entregado (Cliente)
+### 5.7 UPDATE - Actualizar Estado del Pedido - Entregado (Cliente)
 
 **PATCH** `{{base_url}}/pedidos/{{pedido_id}}/estado`
 
@@ -534,9 +584,11 @@ Authorization: Bearer {{token_cliente}}
 }
 ```
 
+**Nota:** Solo el cliente que creó el pedido puede marcarlo como `entregado`.
+
 ---
 
-### 5.7 Cancelar Pedido (Cliente)
+### 5.8 DELETE - Cancelar Pedido (Cliente)
 
 **POST** `{{base_url}}/pedidos/{{pedido_id}}/cancelar`
 
@@ -545,18 +597,18 @@ Authorization: Bearer {{token_cliente}}
 Authorization: Bearer {{token_cliente}}
 ```
 
-**Nota:** Solo funciona si el pedido está en estado `pendiente` o `preparando`
+**Nota:** Solo funciona si el pedido está en estado `pendiente` o `preparando`. Solo el cliente que creó el pedido puede cancelarlo.
 
 ---
 
-### 5.8 Listar Todos los Pedidos (Organizador)
+### 5.9 Estados Válidos de Pedidos
 
-**GET** `{{base_url}}/pedidos`
-
-**Headers:**
-```
-Authorization: Bearer {{token_organizador}}
-```
+Los estados válidos son (en orden de flujo):
+- `pendiente`: Estado inicial del pedido
+- `preparando`: El emprendedor está preparando el pedido
+- `listo`: El pedido está listo para ser entregado
+- `entregado`: El pedido ha sido entregado al cliente
+- `cancelado`: El pedido ha sido cancelado
 
 ---
 
@@ -611,12 +663,14 @@ Authorization: Bearer {{token_organizador}}
 
 1. **Crear usuarios** (1.1, 1.2, 1.3)
 2. **Login usuarios** (1.4, 1.5, 1.6)
-3. **Crear puesto** (2.1)
-4. **Aprobar y activar puesto** (3.1, 3.2)
-5. **Crear productos** (4.1, 4.2)
-6. **Crear pedido** (5.1)
-7. **Actualizar estado del pedido** (5.4, 5.5, 5.6)
-8. **Ver estadísticas** (6.1)
+3. **CRUD de Puestos:**
+   - Crear puesto (2.1)
+   - Aprobar y activar puesto (3.1, 3.2)
+4. **Crear productos** (4.1, 4.2)
+5. **CRUD de Pedidos:**
+   - Crear pedido (5.1)
+   - Actualizar estado del pedido (5.5, 5.6, 5.7)
+6. **Ver estadísticas** (6.1)
 
 ---
 
