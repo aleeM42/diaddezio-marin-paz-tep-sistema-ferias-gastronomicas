@@ -1,0 +1,730 @@
+{
+  "info": {
+    "_postman_id": "fc093446-5002-47ca-9704-954d2a8ddda4",
+    "name": "{{base_url}}",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "/pedidos",
+      "id": "d8d51c68-c1a7-4c3e-a834-6578a1bdfe91",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_cliente}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"stallId\": \"{{puesto_id}}\",\r\n  \"items\": [\r\n    {\r\n      \"productId\": \"{{producto_id}}\",\r\n      \"quantity\": 2\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/pedidos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "pedidos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/productos/{{producto_id}}",
+      "id": "604670df-77b9-4f69-a8bc-fa3015023dba",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"price\": 16.00,\r\n  \"stock\": 90\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/productos/{{producto_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "productos",
+            "{{producto_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/productos/puesto/{{puesto_id}}",
+      "id": "7888454a-74eb-49a7-96b4-3b292a69b556",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Refresco\",\r\n  \"price\": 8.00,\r\n  \"category\": \"Bebidas\",\r\n  \"stock\": 50,\r\n  \"stallId\": \"{{puesto_id}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/productos/puesto/{{puesto_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "productos",
+            "puesto",
+            "{{puesto_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/productos/{{producto_id}}",
+      "id": "8e880e7d-9767-4630-8d1c-cd68feaf1ab9",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Refresco\",\r\n  \"price\": 8.00,\r\n  \"category\": \"Bebidas\",\r\n  \"stock\": 50,\r\n  \"stallId\": \"{{puesto_id}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/productos/{{producto_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "productos",
+            "{{producto_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/productos",
+      "id": "db840297-0a58-4b73-a591-2da54df720e7",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Refresco\",\r\n  \"price\": 8.00,\r\n  \"category\": \"Bebidas\",\r\n  \"stock\": 50,\r\n  \"stallId\": \"{{puesto_id}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/productos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "productos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/productos",
+      "id": "43b2b933-5bd9-42a8-a70a-a1181d3da055",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Refresco\",\r\n  \"price\": 8.00,\r\n  \"category\": \"Bebidas\",\r\n  \"stock\": 50,\r\n  \"stallId\": \"{{puesto_id}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/productos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "productos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/puestos/{{puesto_id}}/activar",
+      "id": "cf2b473c-ea79-4899-9d9e-35a5a9f4eade",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_organizador}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Puesto de Tacos\",\r\n  \"description\": \"Los mejores tacos de la feria\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/puestos/{{puesto_id}}/activar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "puestos",
+            "{{puesto_id}}",
+            "activar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/puestos/{{puesto_id}}/aprobar",
+      "id": "78e670ee-33da-47e9-973b-2c8c1eca983b",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_organizador}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Puesto de Tacos\",\r\n  \"description\": \"Los mejores tacos de la feria\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/puestos/{{puesto_id}}/aprobar",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "puestos",
+            "{{puesto_id}}",
+            "aprobar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/puestos/{{puesto_id}}",
+      "id": "3261d96b-01e0-444a-a72c-f372570b5bd0",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Puesto de Tacos\",\r\n  \"description\": \"Los mejores tacos de la feria\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/puestos/{{puesto_id}}",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "puestos",
+            "{{puesto_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/puestos/activos",
+      "id": "e05a8a62-c322-4a6c-8cd4-324b171e3984",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Puesto de Tacos\",\r\n  \"description\": \"Los mejores tacos de la feria\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/puestos/activos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "puestos",
+            "activos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{base_url}}/auth/register",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1e1f7aa8-ee25-4f99-ac98-44d6128bcd36",
+            "exec": [
+              "if (pm.response.code === 201) {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.environment.set(\"pedido_id\", jsonData.id);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "b30628b2-26bd-4752-9b7b-6c72a544a4b0",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"cliente3@ejemplo.com\",\r\n  \"password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{base_url}}/auth/register",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1e1f7aa8-ee25-4f99-ac98-44d6128bcd36",
+            "exec": [
+              "if (pm.response.code === 200) {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.environment.set(\"token_cliente\", jsonData.token);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "329fc558-5a9d-4255-9e94-36dd6be1ccb0",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_cliente}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"cliente3@ejemplo.com\",\r\n  \"password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/profile",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{base_url}}/auth/profile",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1e1f7aa8-ee25-4f99-ac98-44d6128bcd36",
+            "exec": [
+              "if (pm.response.code === 201) {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.environment.set(\"puesto_id\", jsonData.id);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "66082934-9915-449a-8314-c4482087ba87",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_emprendedor}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Puesto de Churros\",\r\n  \"description\": \"Los mejores churros de la feria\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/puestos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "puestos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{base_url}}/puestos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1e1f7aa8-ee25-4f99-ac98-44d6128bcd36",
+            "exec": [
+              "if (pm.response.code === 201) {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.environment.set(\"puesto_id\", jsonData.id);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "e9f036d7-5347-4f15-9707-197f3750f051",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_organizador}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Puesto de Churros\",\r\n  \"description\": \"Los mejores churros de la feria\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/estadisticas",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "estadisticas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "{{base_url}}/estadisticas",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1e1f7aa8-ee25-4f99-ac98-44d6128bcd36",
+            "exec": [
+              "if (pm.response.code === 201) {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.environment.set(\"puesto_id\", jsonData.id);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "ead8ab32-4d1f-44b8-9e9a-1af7544664f5",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token_organizador}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Puesto de Churros\",\r\n  \"description\": \"Los mejores churros de la feria\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/estadisticas",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "estadisticas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "/auth/login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "c97c0237-6f78-4439-a7f8-2294bb06db2c",
+            "exec": [
+              "if (pm.response.code === 200) {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.environment.set(\"token_cliente\", jsonData.token);\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "e81596e4-7e6a-41bf-9a29-a4c3c8d9cb84",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"cliente@ejemplo.com\",\r\n  \"password\": \"password123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/auth/login",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
